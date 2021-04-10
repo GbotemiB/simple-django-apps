@@ -31,7 +31,7 @@ def start():
 
 
 def generateAccountNumber():
-    return random.randrange(1111111111)
+    return random.randrange(1111111111 - 999999999)
 
 
 def signUp():
@@ -60,34 +60,34 @@ def login():
     
     userAccountNumber = int(input("Enter your Account Number \n"))
 
-    for accountNumber, userDetails in database.items():
-        if (accountNumber == userAccountNumber):
-            
+    #for accountNumber, userDetails in database.keys():
+    if (userAccountNumber in list(database.keys())):
+        password = input("Enter password here: \n")
 
-            trial = 3
-            while trial > 0:
-                password = input("Enter password here: \n")
-                if (password == userDetails[3]):
-                    print ("Login Successful \nWelcome %s" % userDetails[0])
-                    option = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
-                    bankOperation(option)
+        trial = 3
+        while trial > 0:
+            
+            if (password == database.get(userAccountNumber)[3]):
+                print ("Login Successful \nWelcome %s" % database.get(userAccountNumber)[0])
+                select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
+                bankOperation(select)
+            else:
+                trial -= 1
+                if (trial != 0):
+                    print ("wrong password, try again. you have %d more trials" % trial)
                 else:
-                    trial -= 1
-                    if (trial == 0):
-                        print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
-                        options = int(input(""))
-                        if (options == 1):
-                            forgotPassword()
-                        elif (options == 2):
-                            exitBank()
-                        else:
-                            print("Invalid option")
+                    print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
+                    select = int(input(""))
+                    if (select == 1):
+                        forgotPassword()
+                    elif (select == 2):
+                        exitBank()
                     else:
-                        print ("wrong password, try again. you have %d more trials" % trial)
-                    
-        else:
-            print("Check if Account number is correct")
-            login()
+                        print("Invalid option")
+                
+    else:
+        print("Check if Account number is correct")
+        login()
 
 
 def bankOperation(option):
@@ -107,6 +107,13 @@ def bankOperation(option):
         exitBank()
     else:
         print("Please choose from the listed options")
+
+def complaint():
+    pass
+
+
+def deposit():
+    pass
 
 def withdrawal():
     acctBalance = int(input("How much will you like to withdraw: \n")) 
