@@ -58,70 +58,79 @@ def signUp():
 
 def login():
     
-    userAccountNumber = int(input("Enter your Account Number \n"))
+    
 
     #for accountNumber, userDetails in database.keys():
-    if (userAccountNumber in list(database.keys())):
-        
-        trial = 3
-        while trial >= 0:
-            password = input("Enter password here: \n")
+    accountTrial = 2
+    while accountTrial >= 0:
+        userAccountNumber = int(input("Enter your Account Number \n"))
+        if (userAccountNumber in list(database.keys())):
+            
+            trial = 3
+            while trial >= 0:
+                password = input("Enter password here: \n")
 
-            if (password == database.get(userAccountNumber)[3]):
-                print ("Login Successful \nWelcome %s" % database.get(userAccountNumber)[0])
-                select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
-                bankOperation(select)
-            elif (trial != 0):
-                print ("wrong password, try again. you have %d more trials" % trial)
-                trial -= 1
-            else:
-                print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
-                select = int(input(""))
-                if (select == 1):
-                    forgotPassword()
-                elif (select == 2):
-                    exitBank()
+                if (password == database.get(userAccountNumber)[3]):
+                    print ("Login Successful \nWelcome %s" % database.get(userAccountNumber)[0])
+                    bankOperation()
+                elif (trial != 0):
+                    print ("wrong password, try again. you have %d more trials" % trial)
+                    trial -= 1
                 else:
-                    print("Invalid option")
+                    print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
+                    select = int(input(""))
+                    if (select == 1):
+                        forgotPassword()
+                    elif (select == 2):
+                        exitBank()
+                    else:
+                        print("Invalid option")
+        elif (accountTrial != 0):
+            accountTrial -= 1
+            print("Check if Account number is correct")
+            
+
+        else:
+            print("You have exceeded the number of tries to attempt account number. \n Please kindly reach out to us on 080112331231")
+            exit()
+
+
+
+def bankOperation():
+    select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
                 
-    else:
-        print("Check if Account number is correct")
-        login()
-
-
-def bankOperation(option):
     #result of choosing option 1 or 2 or 3
-    if option == 1:
-        acctBalance = int(input("How much will you like to withdraw: "))
-        print ("Take your cash")
-    elif option == 2:
-        acctBalance = int(input("How much would you like to deposit? "))
-        print ("Your current balance is", acctBalance)
-    elif option == 3:
-        isSue = input("What issue will you like to report? \n")
-        print ("Thank you for contacting us")
-    elif option == 4:
+    if select == 1:
+        withdrawal()
+    elif select == 2:
+        deposit()
+    elif select == 3:
+        complaint()
+    elif select == 4:
         logOut()
-    elif option == 5:
+    elif select == 5:
         exitBank()
     else:
         print("Please choose from the listed options")
 
 def complaint():
-    pass
-
+    isSue = input("What issue will you like to report? \n")
+    print ("Thank you for contacting us")
+    bankOperation()
 
 def deposit():
-    pass
+    acctBalance = int(input("How much would you like to deposit? "))
+    print ("Your current balance is", acctBalance)
+    bankOperation()
 
 def withdrawal():
     acctBalance = int(input("How much will you like to withdraw: \n")) 
-    database['']
     print ("Take your cash")
+    bankOperation()
 
 def logOut():
     print("You have successfully been logged out \n******************************\nEnter you details to Login\n******************************\n ")
-    login()
+    exit()
 
 def exitBank():
     print("Goodbye, thank you for banking with us.")
