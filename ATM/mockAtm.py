@@ -62,28 +62,27 @@ def login():
 
     #for accountNumber, userDetails in database.keys():
     if (userAccountNumber in list(database.keys())):
-        password = input("Enter password here: \n")
-
+        
         trial = 3
-        while trial > 0:
-            
+        while trial >= 0:
+            password = input("Enter password here: \n")
+
             if (password == database.get(userAccountNumber)[3]):
                 print ("Login Successful \nWelcome %s" % database.get(userAccountNumber)[0])
                 select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
                 bankOperation(select)
-            else:
+            elif (trial != 0):
+                print ("wrong password, try again. you have %d more trials" % trial)
                 trial -= 1
-                if (trial != 0):
-                    print ("wrong password, try again. you have %d more trials" % trial)
+            else:
+                print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
+                select = int(input(""))
+                if (select == 1):
+                    forgotPassword()
+                elif (select == 2):
+                    exitBank()
                 else:
-                    print("You have exceeded the number of tries. Select the following options 1 (Forgot Password) 2 (Exit)")
-                    select = int(input(""))
-                    if (select == 1):
-                        forgotPassword()
-                    elif (select == 2):
-                        exitBank()
-                    else:
-                        print("Invalid option")
+                    print("Invalid option")
                 
     else:
         print("Check if Account number is correct")
