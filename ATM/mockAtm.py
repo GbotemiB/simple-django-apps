@@ -6,6 +6,11 @@
 import datetime
 import random
 
+
+
+#TODO handle error with strings
+
+
 #sample data
 database = {1111000001: ['Gbotemi', 'Bolarinwa', 'gbotemi@gmail.com', 'gbotemiPassword']}
 
@@ -15,30 +20,43 @@ def displayTime():
     today = datetime.datetime.now()
     print (today.strftime("%B %d, %Y %H:%M:%S"))
 
-# to begin operations in the bank
-def start():
-    print("Welcome to Bank Dot")
-    displayTime()
-    
-    isOptionCorrect = False
-
-    while (isOptionCorrect == False):
-
-        welcome = int(input("Do you have an account with us? 1 (Yes) 2 (No) \n"))
-        if welcome == 2:
-            signUp()
-            isOptionCorrect = True
-
-        elif welcome == 1:
-            login()
-            isOptionCorrect = True
-
-        else:
-            print("Invalid option")
-
 #generating Account number for new Users
 def generateAccountNumber():
     return random.randrange(1111111111 - 999999999)
+
+
+#complaints function for complaints
+def complaint():
+    isSue = input("What issue will you like to report? \n")
+    print ("Thank you for contacting us")
+    bankOperation()
+
+
+#functions for depositing into the bank
+def deposit():
+    acctBalance = int(input("How much would you like to deposit? "))
+    print ("Your current balance is", acctBalance)
+    bankOperation()
+
+
+#withdrawal functions for users
+def withdrawal():
+    acctBalance = int(input("How much will you like to withdraw: \n")) 
+    print ("Take your cash\n")
+    bankOperation()
+
+
+#log out functions to log out of the bank app
+def logOut():
+    print("You have successfully been logged out \n******************************\nEnter you details to Login\n******************************\n ")
+    exit()
+
+
+#exit functions to exit the app
+def exitBank():
+    print("Goodbye, thank you for banking with us.")
+    exit()
+
 
 #operation to sign up
 def signUp():
@@ -58,16 +76,13 @@ def signUp():
     print("Your Account number is %d" % accountNumber)
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
    
-    
     return login()
 
     
 #login function for users
 def login():
     
-    
-
-    #for accountNumber, userDetails in database.keys():
+    #while loop for retry 
     accountTrial = 2
     while accountTrial >= 0:
         userAccountNumber = int(input("Enter your Account Number \n"))
@@ -104,7 +119,7 @@ def login():
 
 #bank operations to be performed
 def bankOperation():
-    select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
+    select = int(input("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nWhat would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
                 
     #result of choosing option 1 or 2 or 3
     if select == 1:
@@ -120,41 +135,27 @@ def bankOperation():
     else:
         print("Please choose from the listed options")
 
+# to begin operations in the bank
+def start():
+    print("Welcome to Bank Dot")
+    displayTime()
+    
+    #loop for retry
+    isOptionCorrect = False
 
-#complaints function for complaints
-def complaint():
-    isSue = input("What issue will you like to report? \n")
-    print ("Thank you for contacting us")
-    bankOperation()
+    while (isOptionCorrect == False):
 
+        welcome = int(input("Do you have an account with us? 1 (Login) 2 (Sign Up) \n"))
+        if welcome == 2:
+            signUp()
+            isOptionCorrect = True
 
-#functions for depositing into the bank
-def deposit():
-    acctBalance = int(input("How much would you like to deposit? "))
-    print ("Your current balance is", acctBalance)
-    bankOperation()
+        elif welcome == 1:
+            login()
+            isOptionCorrect = True
 
+        else:
+            print("Invalid option")
 
-#withdrawal functions for users
-def withdrawal():
-    acctBalance = int(input("How much will you like to withdraw: \n")) 
-    print ("Take your cash")
-    bankOperation()
-
-
-#log out functions to log out of the bank app
-def logOut():
-    print("You have successfully been logged out \n******************************\nEnter you details to Login\n******************************\n ")
-    exit()
-
-
-#exit functions to exit the app
-def exitBank():
-    print("Goodbye, thank you for banking with us.")
-    exit()
-
-
-#TODO handle error with strings
-
-
+#begin operations for the bank app
 start()
