@@ -1,6 +1,6 @@
 """ 
     A mock Atm Project that performs the basic operations in a bank
- """
+"""
 
 #import methods to be used 
 import datetime
@@ -143,6 +143,7 @@ def start():
     #loop for retry
     isOptionCorrect = False
 
+            
     while (isOptionCorrect == False):
 
         welcome = int(input("Do you have an account with us? 1 (Login) 2 (Sign Up) \n"))
@@ -158,4 +159,13 @@ def start():
             print("Invalid option")
 
 #begin operations for the bank app
-start()
+
+def action():
+    try:
+        start()
+    except ValueError as err:
+        print(f"{err} is not an int, please enter one of the options")
+        action()
+        
+
+action()
