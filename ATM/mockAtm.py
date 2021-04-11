@@ -1,18 +1,24 @@
-#mock atm project
+""" 
+    A mock Atm Project that performs the basic operations in a bank
+ """
+
+#import methods to be used 
 import datetime
 import random
 
 #sample data
 database = {1111000001: ['Gbotemi', 'Bolarinwa', 'gbotemi@gmail.com', 'gbotemiPassword']}
 
+#timestamp for login
 def displayTime():
     #display time and date
     today = datetime.datetime.now()
     print (today.strftime("%B %d, %Y %H:%M:%S"))
 
+# to begin operations in the bank
 def start():
     print("Welcome to Bank Dot")
-
+    
     isOptionCorrect = False
 
     while (isOptionCorrect == False):
@@ -29,11 +35,11 @@ def start():
         else:
             print("Invalid option")
 
-
+#generating Account number for new Users
 def generateAccountNumber():
     return random.randrange(1111111111 - 999999999)
 
-
+#operation to sign up
 def signUp():
     firstName = input("Enter Firstname \n")
     surName = input("Enter Surname \n")
@@ -55,7 +61,7 @@ def signUp():
     return login()
 
     
-
+#login function for users
 def login():
     
     
@@ -95,7 +101,7 @@ def login():
             exit()
 
 
-
+#bank operations to be performed
 def bankOperation():
     select = int(input("What would you like to do? \n 1: Withdrawal \n 2: Deposit \n 3: Complaint \n 4: Logout \n 5: Exit \n"))
                 
@@ -113,25 +119,35 @@ def bankOperation():
     else:
         print("Please choose from the listed options")
 
+
+#complaints function for complaints
 def complaint():
     isSue = input("What issue will you like to report? \n")
     print ("Thank you for contacting us")
     bankOperation()
 
+
+#functions for depositing into the bank
 def deposit():
     acctBalance = int(input("How much would you like to deposit? "))
     print ("Your current balance is", acctBalance)
     bankOperation()
 
+
+#withdrawal functions for users
 def withdrawal():
     acctBalance = int(input("How much will you like to withdraw: \n")) 
     print ("Take your cash")
     bankOperation()
 
+
+#log out functions to log out of the bank app
 def logOut():
     print("You have successfully been logged out \n******************************\nEnter you details to Login\n******************************\n ")
     exit()
 
+
+#exit functions to exit the app
 def exitBank():
     print("Goodbye, thank you for banking with us.")
     exit()
