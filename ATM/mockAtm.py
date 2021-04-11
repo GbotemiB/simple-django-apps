@@ -18,6 +18,7 @@ def displayTime():
 # to begin operations in the bank
 def start():
     print("Welcome to Bank Dot")
+    displayTime()
     
     isOptionCorrect = False
 
