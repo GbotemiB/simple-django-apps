@@ -28,22 +28,24 @@ def generateAccountNumber():
 #complaints function for complaints
 def complaint():
     isSue = input("What issue will you like to report? \n")
+    print("==================================")
     print ("Thank you for contacting us")
-    bankOperation()
+    print("==================================")
+    continueTransaction()
 
 
 #functions for depositing into the bank
 def deposit():
-    acctBalance = int(input("How much would you like to deposit? "))
+    acctBalance = int(input("How much would you like to deposit? \n"))
     print ("Your current balance is", acctBalance)
-    bankOperation()
+    continueTransaction()
 
 
 #withdrawal functions for users
 def withdrawal():
     acctBalance = int(input("How much will you like to withdraw: \n")) 
     print ("Take your cash\n")
-    bankOperation()
+    continueTransaction()
 
 
 #log out functions to log out of the bank app
@@ -85,6 +87,7 @@ def login():
     #while loop for retry 
     accountTrial = 2
     while accountTrial >= 0:
+        
         userAccountNumber = int(input("Enter your Account Number \n"))
         if (userAccountNumber in list(database.keys())):
             
@@ -157,6 +160,13 @@ def start():
 
         else:
             print("Invalid option")
+
+def continueTransaction():
+    continueTransactOption = int(input("Would you like to continue? (1) Yes (2) No \n"))
+    if continueTransactOption == 1:
+        bankOperation()
+    else:
+        exit()
 
 #begin operations for the bank app
 
