@@ -5,14 +5,15 @@
 #import methods to be used 
 import datetime
 import random
-
+import json
 
 
 #TODO handle error with strings
 
+#current directory  
 
-#sample data
-database = {1111000001: ['Gbotemi', 'Bolarinwa', 'gbotemi@gmail.com', 'gbotemiPassword']}
+pwd = ("Zuri-Tasks/ATM/data.json")
+
 
 #timestamp for login
 def displayTime():
@@ -62,13 +63,18 @@ def exitBank():
 
 #operation to sign up
 def signUp():
+
+    #dict to store new data during sign up
+    dictionary = {}
+
+
     firstName = input("Enter Firstname \n")
     surName = input("Enter Surname \n")
     newEmail = input("Enter new email \n")
     newPassword = input("Enter new password \n")
     accountNumber = generateAccountNumber()
     
-    database[accountNumber] = [ firstName, surName, newEmail, newPassword]
+    dictionary[accountNumber] = [ firstName, surName, newEmail, newPassword]
 
     
     print("you have successfully signed up")
@@ -77,26 +83,38 @@ def signUp():
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print("Your Account number is %d" % accountNumber)
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-   
+
+    with open (pwd) as json_file:
+        database = json.load(json_file)
+
+    database.update(dictionary)
+
+    with open(pwd, 'w') as outfile:
+        json.dump(database, outfile, indent=4)
+    
     return login()
 
     
 #login function for users
 def login():
-    
+
+    with open (pwd) as json_file:
+        database = json.load(json_file)
+   
+
     #while loop for retry 
     accountTrial = 2
     while accountTrial >= 0:
         
         userAccountNumber = int(input("Enter your Account Number \n"))
-        if (userAccountNumber in list(database.keys())):
+        if (str(userAccountNumber) in list(database.keys())):
             
             trial = 3
             while trial >= 0:
                 password = input("Enter password here: \n")
 
-                if (password == database.get(userAccountNumber)[3]):
-                    print ("Login Successful \nWelcome %s" % database.get(userAccountNumber)[0])
+                if (password == database.get(str(userAccountNumber))[3]):
+                    print ("Login Successful \nWelcome %s" % database.get(str(userAccountNumber))[0])
                     bankOperation()
                 elif (trial != 0):
                     print ("wrong password, try again. you have %d more trials" % trial)
