@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>Django blog</title>
+<meta name="viewport" content="width=device-width,
+initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/..." rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" rel="stylesh\
 eet">
 <link href="{% static 'css/base.css' %}" rel="stylesheet"s>
@@ -22,9 +26,14 @@ eet">
 {% else %}
 <p>You are not logged in.</p>
 <a href="{% url 'login' %}">Log In</a>
+<a href="{% url 'signup' %}">Sign Up</a>
 {% endif %}
 {% block content %}
 {% endblock content %}
 </div>
+
+<script src="https://code.jquery.com/..."></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js..."></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/..."></script>
 </body>
 </html>
