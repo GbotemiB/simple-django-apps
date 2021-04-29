@@ -1,7 +1,7 @@
 <H1>Zuri Tasks</H1>
-This contains all mini project or task that were assigned while learning from Zuri.
+This contains all mini-projects or tasks that were assigned while learning from Zuri.
 
-Included in this project is a mini BlogApp designed with Django.
+Included in this project is a mini Blog App designed with Django.
 
 The webapp is currently hosted on https://gbotemib-blog.herokuapp.com/
 
