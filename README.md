@@ -7,8 +7,8 @@ The webapp is currently hosted on https://gbotemib-blog.herokuapp.com/
 
 The Blog App is able to perform functions that include;
 <ul>
-  <li>Registering new users</li>
-<li>Authenticating existing users</li>
+  <li>Registering New users</li>
+<li>Authenticating Existing users</li>
 <li>Creating Blog post</li>
 <li>Editing Blog post</li>
 <li>Deleting Blog post</li>
